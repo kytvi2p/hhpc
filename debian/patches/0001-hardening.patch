@@ -1,0 +1,33 @@
+From: Kill Your TV <killyourtv@i2pmail.org>
+Date: Sun, 8 Mar 2015 02:51:47 +0000
+Subject: hardening
+
+---
+ Makefile | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 40fb0d9..fa61977 100644
+--- a/Makefile
++++ b/Makefile
+@@ -48,6 +48,7 @@ WARN ?= \
+ CFLAGS_COMMON ?= \
+ 	-D_XOPEN_SOURCE \
+ 	-D_POSIX_C_SOURCE=200809L \
++	$(shell dpkg-buildflags --get CFLAGS) \
+ 	-pedantic \
+ 	-std=c99
+ 
+@@ -73,10 +74,10 @@ release: CFLAGS += \
+ release: $(EXECUTABLE)
+ 
+ $(EXECUTABLE): $(OBJECTS)
+-	$(CC) -o $@ $^ $(shell pkg-config --libs x11) $(CFLAGS)
++	$(CC) -o $@ $^ $(shell pkg-config --libs x11) $(CFLAGS) $(shell dpkg-buildflags --get LDFLAGS)
+ 
+ %.o: %.c
+-	$(CC) -c $< $(shell pkg-config --cflags x11) $(CFLAGS)
++	$(CC) -c $< $(shell pkg-config --cflags x11) $(CFLAGS) $(shell dpkg-buildflags --get LDFLAGS)
+ 
+ clean:
+ 	rm -f $(EXECUTABLE) $(OBJECTS)
