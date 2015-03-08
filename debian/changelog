@@ -1,3 +1,9 @@
+hhpc (0.3.1-1~deb7u+1) stable; urgency=medium
+
+  * Backport to Wheezy
+
+ -- Kill Your TV <killyourtv@i2pmail.org>  Sun, 08 Mar 2015 02:54:35 +0000
+
 hhpc (0.3.1-1) unstable; urgency=low
 
   * Initial release
